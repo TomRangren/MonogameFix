@@ -20,6 +20,7 @@ namespace Template
         Vector2 enemyPos;
         Fiende fiende;
         Random random = new Random();
+        FiendeSpawn fiendeSpawner;
 
 
 
@@ -29,7 +30,7 @@ namespace Template
             Content.RootDirectory = "Content";
             graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
             graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
-            graphics.IsFullScreen = true;
+            graphics.IsFullScreen = false;
             graphics.ApplyChanges();
         }
 
@@ -68,7 +69,7 @@ namespace Template
             FiendeTexture1 = Content.Load<Texture2D>("FiendeTexture1");
             swamp2 = Content.Load<Texture2D>("swamp2");
 
-
+            fiendeSpawner = new FiendeSpawn(graphics, FiendeTexture1);
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
@@ -101,6 +102,7 @@ namespace Template
 
 
             fiende.Update();
+            fiendeSpawner.Update();
 
 
 
@@ -124,7 +126,7 @@ namespace Template
             spriteBatch.Draw(swamp2, Vector2.Zero, Color.White);
             spriteBatch.Draw(Hunter2, gunPos, Color.White);
             fiende.Draw(spriteBatch);
-
+            fiendeSpawner.Draw(spriteBatch);
             spriteBatch.End();
             base.Draw(gameTime);
         }
